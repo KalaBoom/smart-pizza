@@ -1,7 +1,7 @@
 <template>
     <div>
         Каталог товара
-        <CardProduct v-for="(product, index) in products"
+        <CardProduct v-for="(product, index) in allProducts"
             :key="index"
             :product="product"
         />
@@ -9,11 +9,10 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 import CardProduct from '@/components/CardProduct.vue'
 export default {
-    props: {
-        products: Array
-    },
+    computed: mapGetters(['allProducts']),
     components: {
         CardProduct
     }

@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Иконка пиццы</router-link> |
-      <router-link to="/basket">Иконка корзины</router-link>
+      <router-link to="/cart">Иконка корзины</router-link>
     </div>
     <router-view/>
   </div>
