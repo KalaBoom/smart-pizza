@@ -25,8 +25,14 @@ export default {
     actions: {
     },
     getters: {
-        allProducts(state) {
-            return state.products
+        productsPizza(state) {
+            return state.products.filter(product => product.type === 'пицца')
+        },
+        productsSnack(state) {
+            return state.products.filter(product => product.type === 'закуска')
+        },
+        productsDrink(state) {
+            return state.products.filter(product => product.type === 'напитки')
         },
         cart(state) {
             return state.cart
