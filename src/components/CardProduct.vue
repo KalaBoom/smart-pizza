@@ -1,11 +1,20 @@
 <template>
     <div class="product">
-        <img src="../assets/img/test.jpeg" alt="изображение" class="product__img">
+        <div class="product__image">
+            <img :src="product.img" alt="изображение" class="img">
+            <div class="product__image__discount" v-if="product.discount"></div>
+        </div>
         <div class="product__title">{{product.title}}</div>
         <div class="product__ingredients" v-if="product.ingredients">{{product.ingredients.join(' ')}}</div>
-        <div class="product__cost">{{product.cost}}</div>
+        <div class="product__discount cost" v-if="product.discount">
+            <span class="product__discount__old-cost">{{product.cost}}</span>
+            {{product.cost * (1 - product.discount * 0.01)}}
+        </div>
+        <div class="product__cost cost" v-else>
+            {{product.cost}}
+        </div>
         <CountButtons class="product__count" :id="product.id" v-if="inCart"/>
-        <button class="accent-btn" @click="addItem" v-else>в корзину</button>
+        <button class="product__count accent-btn" @click="addItem" v-else>в корзину</button>
     </div>
 </template>
 
@@ -42,51 +51,75 @@ export default {
         border-radius: 5px;
         width: calc(100%/5 - (0.25em * 6));
         @media screen and (max-width: 1200px) {
-            & {
-                width: calc(100%/4 - (0.25em * 6));
-            }
+            width: calc(100%/4 - (0.25em * 6));
         }
         @media screen and (max-width: 800px) {
-            & {
-                width: calc(100%/3 - (0.25em * 6));
-            }
+            width: calc(100%/3 - (0.25em * 6));
         }
         @media screen and (max-width: 600px) {
-            & {
-                width: calc(100%/2 - (0.25em * 6));
-            }
+            width: calc(100%/2 - (0.25em * 6));
         }
         @media screen and (max-width: 400px) {
-            & {
-                width: calc(100%/1 - (0.25em * 6));
+            width: calc(100%/1 - (0.25em * 6));
+        }
+        &__image {
+            position: relative;
+            &__discount  {
+                position: absolute;
+                background-image: url('../assets/percentage.svg');
+                background-size: contain;
+                width: 5em;
+                height: 5em;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
             }
         }
-        &__img {
-            width: 100%;
-            background-color: #ccc;
-        }
         &__title {
-           text-transform: uppercase;
-           font-weight: bold;
+            height: 20%;
+            margin-top: 1em;
+            text-transform: uppercase;
+            font-weight: bold;
         }
         &__ingredients {
             color: #777;
         }
-        &__cost {
+        &__cost, &__discount {
             margin: 0.5em;
-            font-size: 1.3rem;
-            &::after {
-                content: '\20BD';
-                margin-left: 0.1em;
+        }
+        &__discount {
+            position: relative;
+            &__old-cost {
+                position: absolute;
+                font-size: 1rem;
+                right: -3em;
+                text-decoration: line-through;
+                color: #555;
             }
         }
         &__count {
+            flex: 0 0 auto;
             width: 50%;
             margin: 0 auto;
+            @media screen and (max-width: 1000px) {
+                width: 80%;
+            }
         }
-        &__img, &__title, &__ingredients, &__cost, &__count {
-            flex: 1;
-        }
+        // &__img, &__title, &__ingredients, &__cost, &__discount {
+        //     flex: 1 1 auto;
+        // }
+    }
+    .cost {
+        font-size: 1.3rem;
+        &::after {
+                content: '\20BD';
+                margin-left: 0.1em;
+            }
+    }
+    .img {
+        width: 100%;
+        background-color: white;
     }
     .accent-btn {
         font-size: 1.2rem;

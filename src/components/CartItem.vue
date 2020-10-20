@@ -1,7 +1,7 @@
 <template>
     <div class="item">
         <div class="item__block-product">
-            <div class="item__type">{{item.type}}</div>
+            <div class="item__type"><img :src="item.img" :alt="item.type" class="img"></div>
             <div class="item__title">{{item.title}}</div>
             <div class="item__ingredients" v-if="item.ingredients">{{item.ingredients.join(',')}}</div>
         </div>
@@ -9,7 +9,10 @@
              <div class="item__count">
                 <CountButtons :id="item.id"/>
             </div>
-            <div class="item__cost">{{item.cost * item.count}}</div>
+            <div class="item__cost cost">
+                <span v-if="item.discount" class="item-discount">{{item.cost * (1 - item.discount * 0.01)}}</span>
+                <span v-else>{{item.cost * item.count}}</span> 
+            </div>
         </div>
         <div class="item__delete">
             <button class="btn-delete" @click="removeItem"></button>
@@ -56,7 +59,8 @@ export default {
         }
         &__type {
             margin-right: 1em;
-            width: 5em;
+            width: 3em;
+            height: 3em;
         }
         &__title {
             text-align: left;
@@ -68,16 +72,11 @@ export default {
             word-break: break-all;
         }
         &__cost {
-            font-size: 1.2rem;
+            position: relative;
             text-align: center;
             margin: 0 2em;
             width: 5em;
-            &::after {
-                content: '\20BD';
-                margin-left: 0.1em;
-            }
         }
-        &__cost {}
         @media screen and (max-width: 1200px) {
             &__block-product {
                 flex-direction: column;
@@ -128,6 +127,19 @@ export default {
             background-position: center;
             background-size: contain;
             cursor: pointer;
+        }
+        .item-discount::after {
+            content: '';
+            position: absolute;
+            display: block;
+            height: 1em;
+            width: 1em;
+            top: 0;
+            right: -20%;
+            background-image: url('../assets/percentage.svg');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: right;
         }
     }
 </style>

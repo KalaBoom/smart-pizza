@@ -184,6 +184,9 @@ export default {
             padding: 0.5em 2em 0.5em 0;
             border-radius: 5px;
             cursor: pointer;
+            @media screen and (max-width: 500px) {
+                margin: auto;
+            }
         }
     }
     .basket-link {
@@ -192,7 +195,6 @@ export default {
         justify-content: space-around;
         position: relative;
         align-items: center;
-        vertical-align: middle;
         background-color: orange;
         width: 15em;
         height: 3em;
@@ -220,6 +222,9 @@ export default {
             border-radius: 100px;
             top: 0;
             left: 15%;
+        }
+        @media screen and (max-width: 500px) {
+            margin: auto;
         }
     }
     .arrow {

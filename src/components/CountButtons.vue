@@ -20,6 +20,11 @@ export default {
     mounted() {
         this.count = this.findCountItem(this.id)
     },
+    watch: {
+        count() {
+            this.count = this.findCountItem(this.id)
+        }
+    },
     computed: {
         ...mapGetters(['cart']),
         productCount: {
@@ -35,7 +40,7 @@ export default {
         ...mapMutations(['changeCount', 'removeItemToCart']),
         minusCount() {
             this.changeCount([this.id, --this.productCount])
-            if(this.productCount === 0) this.removeItemToCart(this.id)
+            if (this.productCount <= 0) this.removeItemToCart(this.id)
         },
         plusCount() {
             this.changeCount([this.id, ++this.productCount])
@@ -54,7 +59,7 @@ export default {
         justify-content: center;
         border: 1px solid #ccc;
         border-radius: 10px;
-        width: 6em;
+        width: 5.9em;
         font-size: 1.2rem;
         padding: 0.1em;
         -moz-border-radius: 10px;

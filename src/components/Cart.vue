@@ -9,7 +9,7 @@
                 :item="item"
                 />
             </div>
-            <div class="order__sum">Сумма заказа: {{cartSum}}&#8381;</div>
+            <div class="order__sum">Сумма заказа: <span class="cost">{{cartSum}}</span></div>
             <div class="order__btn">
                 <router-link to="/"><button class="accent-btn btn-back">Вернуться</button></router-link>
                 <button class="accent-btn" @click="submitOrder">Оформить</button>
@@ -59,7 +59,8 @@ export default {
       border-top: 1px solid #ccc;
     }
     &__sum {
-      font-size: 2rem;
+      margin-top: 1em;
+      font-size: 1.2rem;
       font-weight: bold;
       text-align: right;
     }
