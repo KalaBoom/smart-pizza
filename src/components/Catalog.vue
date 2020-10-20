@@ -2,7 +2,7 @@
     <div>
         <header class="header">
             <router-link to="/"><img src="../assets/pizza-slice.svg" alt="иконка пиццы" class="icon-logo"></router-link>
-            <input type="search" v-model="search" @input="searchProducts" placeholder="поиск...">
+            <input type="search" v-model="search" @input="searchProducts" placeholder="поиск..." class="search">
         </header>
 
         <div class="catalog">
@@ -35,29 +35,29 @@
                 </div>
                 </div>
             
-                <router-link to="/basket" class="basket">
-                    <img src="../assets/shopping-cart.svg" alt="иконка корзины" class="basket__icon">
-                    <div class="basket__count">{{cartCount}}</div>
-                    <div>Корзина: <span class="basket__sum">{{cartSum}}</span></div>
+                <router-link to="/basket" class="basket-link">
+                    <img src="../assets/shopping-cart.svg" alt="иконка корзины" class="basket-link__icon">
+                    <div class="basket-link__count">{{cartCount}}</div>
+                    <div>Корзина: <span class="basket-link__sum">{{cartSum}}</span></div>
                 </router-link>
                     
             </div>
 
-            <div class="filter-cost" @click="changeModeFilterCost">
-                <div class="filter-cost__text">
+            <div class="filter-cost">
+                <div class="filter-cost__text" @click="changeModeFilterCost">
                     фильтр по цене
                     <div class="arrow" :class="[{arrow_top: !modeFilterCost}, {arrow_bottom: modeFilterCost}]"></div>
                 </div>
             </div>
 
-            <div class="products">
+            <div class="products" v-if="products.length">
                 <CardProduct v-for="(product, index) in products"
                     :key="index"
                     :product="product"
                     :inCart="cartIds.includes(product.id)"
                 />
             </div>
-
+            <div class="products-none" v-else>Ничего не найдено</div>
         </div>
 
     </div>
@@ -71,7 +71,8 @@ export default {
         return {
             nowCategory: "all",
             modeFilterCost: false,
-            search: ""
+            search: "",
+            isFound: true
         }
     },
     computed: {
@@ -86,8 +87,7 @@ export default {
                 return this.filterCost(resultProducts)
             } else {
                 return this.searchProducts()
-            }
-            
+            } 
         }
     },
     methods: {
@@ -118,16 +118,29 @@ export default {
         width: 90%;
         margin: auto;
         padding: 0 0.5em;
+        @media screen and (max-width: 700px) {
+            flex-direction: column;
+        }
     }
     .header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin: 0 auto 2em;
-        padding-right: 5%;
+        width: 90%;
+        @media screen and (max-width: 400px) {
+            flex-direction: column;
+            .search {
+                width: 100%;
+            }
+        }
+    }
+    .search {
+        width: 20em;
     }
     .category {
         display: flex;
+        align-items: center;
         &__radio-btn {
             margin-right: 1em;
             & input[type=radio] {
@@ -143,6 +156,16 @@ export default {
                 user-select: none;
             }
         }
+        @media screen and (max-width: 500px) {
+            flex-direction: column;
+            &__radio-btn {
+                margin-top: 0.1em;
+            }
+            &__radio-btn, &__radio-btn label {
+                width: 100%;
+                padding: 0.5em;
+            }
+        }
     }
     .active_category {
         background-color: orange;
@@ -151,11 +174,11 @@ export default {
     }
     .filter-cost {
         text-align: center;
-        margin: 1em 0;
+        margin: 1em auto;
+        width: 90%;
         &__text {
             position: relative;
             width: 10em;
-            margin: auto;
             background-color: orange;
             color: white;
             padding: 0.5em 2em 0.5em 0;
@@ -163,7 +186,8 @@ export default {
             cursor: pointer;
         }
     }
-    .basket {
+    .basket-link {
+        margin-top: 1em;
         display: flex;
         justify-content: space-around;
         position: relative;

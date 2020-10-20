@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="basket">
     <router-link to="/"><img src="../assets/pizza-slice.svg" alt="иконка пиццы" class="icon-logo"></router-link>
     <Cart/>    
   </div>
@@ -13,3 +13,10 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .basket {
+    width: 90%;
+    margin: auto;
+  }
+</style>

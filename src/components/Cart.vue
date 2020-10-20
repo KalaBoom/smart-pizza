@@ -9,10 +9,10 @@
                 :item="item"
                 />
             </div>
-            <div class="order__sum">Сумма заказа: {{cartSum}}</div>
+            <div class="order__sum">Сумма заказа: {{cartSum}}&#8381;</div>
             <div class="order__btn">
-                <router-link to="/"><button class="accent-btn btn-back">Вернуться назад</button></router-link>
-                <button class="accent-btn" @click="submitOrder">Оформить заказ</button>
+                <router-link to="/"><button class="accent-btn btn-back">Вернуться</button></router-link>
+                <button class="accent-btn" @click="submitOrder">Оформить</button>
             </div>
         </div>
         <div class="none-items" v-else>Нет товаров в корзине</div>
@@ -40,10 +40,20 @@ export default {
 
 <style lang="scss">
   .cart {
-    width: 55%;
+    width: 70%;
     margin: auto;
     font-size: 1.2rem;
+    @media screen and (max-width: 1600px) {
+      width: 80%;
+    }
+    @media screen and (max-width: 1200px) {
+      width: 90%;
+    }
+    @media screen and (max-width: 800px) {
+      width: 100%;
+    }
   }
+  
   .order {
     &__items {
       border-top: 1px solid #ccc;
@@ -54,7 +64,17 @@ export default {
       text-align: right;
     }
     &__btn {
+      margin-top: 1em;
       text-align: right;
+    }
+    @media screen and (max-width: 400px) {
+      &__btn {
+          display: flex;
+          justify-content: space-between;
+      }
+      &__sum {
+      font-size: 1.5rem;
+    }
     }
   }
   .btn-back {

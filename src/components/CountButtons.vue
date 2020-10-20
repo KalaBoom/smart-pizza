@@ -55,6 +55,8 @@ export default {
         border: 1px solid #ccc;
         border-radius: 10px;
         width: 6em;
+        font-size: 1.2rem;
+        padding: 0.1em;
         -moz-border-radius: 10px;
 	    -webkit-border-radius: 10px;
         &__arrow, &__count {
