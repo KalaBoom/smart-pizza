@@ -9,8 +9,8 @@ export default {
             {id: 6, type: 'закуска', title: 'сэндвич-ролл куриный', cost: 199, count: 0},
             {id: 7, type: 'закуска', title: 'картофель фри', cost: 149, count: 0},
             {id: 8, type: 'закуска', title: 'куриные крылья BBQ', cost: 199, count: 0},
-            {id: 9, type: 'напитки', title: 'Кофе Латте', cost: 115, count: 0},
-            {id: 10,type: 'напитки', title: 'Pepsi', cost: 119, count: 0}
+            {id: 9, type: 'напиток', title: 'Кофе Латте', cost: 115, count: 0},
+            {id: 10,type: 'напиток', title: 'Пепси', cost: 119, count: 0}
         ],
         cart: []
     },
@@ -31,6 +31,9 @@ export default {
         }
     },
     getters: {
+        allProducts(state) {
+            return state.products
+        },
         productsPizza(state) {
             return state.products.filter(product => product.type === 'пицца')
         },
@@ -38,13 +41,19 @@ export default {
             return state.products.filter(product => product.type === 'закуска')
         },
         productsDrink(state) {
-            return state.products.filter(product => product.type === 'напитки')
+            return state.products.filter(product => product.type === 'напиток')
         },
         cart(state) {
             return state.cart
         },
         cartIds(state) {
             return state.cart.map(item => item.id)
+        },
+        cartSum(state) {
+            return state.cart.reduce((acc, item) => (item.cost * item.count) + acc, 0)
+        },
+        cartCount(state) {
+            return state.cart.reduce((acc, item) => item.count + acc, 0)
         }
     }
 }

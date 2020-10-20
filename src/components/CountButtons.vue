@@ -1,8 +1,8 @@
 <template>
     <div class="count-btns">
-        <div class="count-btns__left" @click="minusCount">&minus;</div>
+        <div class="count-btns__arrow" @click="minusCount">&minus;</div>
         <div class="count-btns__count">{{productCount}}</div>
-        <div class="count-btns__right" @click="plusCount">&plus;</div>
+        <div class="count-btns__arrow" @click="plusCount">&plus;</div>
     </div>
 </template>
 
@@ -52,12 +52,21 @@ export default {
     .count-btns {
         display: flex;
         justify-content: center;
-        &__left, &__right, &__count {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        width: 6em;
+        -moz-border-radius: 10px;
+	    -webkit-border-radius: 10px;
+        &__arrow, &__count {
             padding: 0.5em;
+            user-select: none;
         }
-        &__left, &__right {
-            background-color: orange;
+        &__arrow {
+            background-color: white;
             cursor: pointer;
+            &:hover {
+                color: orange;
+            }
         }
         &__count {
         
