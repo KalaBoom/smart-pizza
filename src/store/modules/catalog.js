@@ -1,16 +1,16 @@
 export default {
     state: {
         products: [
-            {id: 1, type: 'пицца', title: 'Перерони', cost: 300},
-            {id: 2, type: 'пицца', title: 'Маргарита', cost: 500},
-            {id: 3, type: 'пицца', title: 'Ананасовая', cost: 700},
-            {id: 4, type: 'пицца', title: 'Гавайская', cost: 800},
-            {id: 5, type: 'пицца', title: 'Сырная', cost: 400},
-            {id: 6, type: 'закуска', title: 'сэндвич-ролл куриный', cost: 199},
-            {id: 7, type: 'закуска', title: 'картофель фри', cost: 149},
-            {id: 8, type: 'закуска', title: 'куриные крылья BBQ', cost: 199},
-            {id: 9, type: 'напитки', title: 'Кофе Латте', cost: 115},
-            {id: 10,type: 'напитки', title: 'Pepsi', cost: 119}
+            {id: 1, type: 'пицца', title: 'Перерони', cost: 300, count: 0},
+            {id: 2, type: 'пицца', title: 'Маргарита', cost: 500, count: 0},
+            {id: 3, type: 'пицца', title: 'Ананасовая', cost: 700, count: 0},
+            {id: 4, type: 'пицца', title: 'Гавайская', cost: 800, count: 0},
+            {id: 5, type: 'пицца', title: 'Сырная', cost: 400, count: 0},
+            {id: 6, type: 'закуска', title: 'сэндвич-ролл куриный', cost: 199, count: 0},
+            {id: 7, type: 'закуска', title: 'картофель фри', cost: 149, count: 0},
+            {id: 8, type: 'закуска', title: 'куриные крылья BBQ', cost: 199, count: 0},
+            {id: 9, type: 'напитки', title: 'Кофе Латте', cost: 115, count: 0},
+            {id: 10,type: 'напитки', title: 'Pepsi', cost: 119, count: 0}
         ],
         cart: []
     },
