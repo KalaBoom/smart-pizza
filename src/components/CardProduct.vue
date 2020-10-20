@@ -3,22 +3,27 @@
         <img src="../assets/img/test.jpeg" alt="изображение" class="product__img">
         <div class="product__title">{{product.title}}</div>
         <div class="product__cost">{{product.cost}}</div>
-        <button class="product__btn" @click="addItem">в корзину</button>
+        <CountButtons :id="product.id" v-if="inCart"/>
+        <button class="product__btn" @click="addItem" v-else>в корзину</button>
     </div>
 </template>
 
 <script>
 import {mapMutations} from 'vuex'
-
+import CountButtons from '@/components/CountButtons.vue'
 export default {
     props: {
-        product: Object
+        product: Object,
+        inCart: Boolean
     },
     methods: {
         ...mapMutations(['addItemToCart']),
         addItem() {
             this.addItemToCart(this.product)
         }
+    },
+    components: {
+        CountButtons
     }
 }
 </script>

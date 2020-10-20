@@ -33,6 +33,7 @@
             <CardProduct v-for="(product, index) in products"
                 :key="index"
                 :product="product"
+                :inCart="cartIds.includes(product.id)"
             />
         </div>
     </div>
@@ -49,7 +50,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters(['productsPizza', 'productsSnack', 'productsDrink']),
+        ...mapGetters(['productsPizza', 'productsSnack', 'productsDrink', 'cartIds']),
         products() {
             let resultProducts = null
             if (this.nowCategory === 'pizza') resultProducts = this.productsPizza

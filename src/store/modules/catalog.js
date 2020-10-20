@@ -16,13 +16,19 @@ export default {
     },
     mutations: {
         addItemToCart(state, item) {
+            item.count = 1
             state.cart.push(item)
         },
         removeItemToCart(state, id) {
             state.cart = state.cart.filter(item => item.id !== id)
+        },
+        changeCount(state, arr) {
+            const [id, count] = arr
+            state.cart = state.cart.map(item => {
+                if (item.id === id) item.count = count
+                return item
+            })
         }
-    },
-    actions: {
     },
     getters: {
         productsPizza(state) {
@@ -36,6 +42,9 @@ export default {
         },
         cart(state) {
             return state.cart
+        },
+        cartIds(state) {
+            return state.cart.map(item => item.id)
         }
     }
 }
