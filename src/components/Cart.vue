@@ -27,7 +27,10 @@ export default {
   computed: mapGetters(["cart", "cartSum"]),
   methods: {
     submitOrder() {
-      const order = this.cart.map(item => `${item.type} ${item.title} ${item.count}шт. ${item.cost*item.count}руб.`)
+      const order = this.cart.map(item => {
+        if(item.discount) return `${item.type} ${item.title} ${item.count}шт. ${item.cost*item.count * (1 - item.discount * 0.01)}руб.`
+        else return `${item.type} ${item.title} ${item.count}шт. ${item.cost*item.count}руб.`
+      })
       order.push(`Итого ${this.cartSum}`)
       console.log(order)
     }
