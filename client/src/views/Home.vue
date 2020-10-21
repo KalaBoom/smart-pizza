@@ -89,7 +89,7 @@ export default {
         } else {
             resultProducts = this.searchProducts()
         } 
-        return resultProducts
+        return this.filterCost(resultProducts)
     }
   },
   async mounted() {
