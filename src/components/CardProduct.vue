@@ -14,9 +14,9 @@
             {{product.cost}}
         </div>
         <CountButtons class="product__count" :id="product.id" v-if="inCart"/>
-        <div class="product__count" v-else>
-            <button class=" accent-btn" @click="addItem" >в корзину</button>
-        </div>
+        <!-- <div class="product__count" > -->
+            <button class=" accent-btn" @click="addItem" v-else>в корзину</button>
+        <!-- </div> -->
     </div>
 </template>
 
@@ -125,7 +125,7 @@ export default {
     }
     .accent-btn {
         font-size: 1.2rem;
-        padding: 0.6em;
+        padding: 0.626em;
         cursor: pointer;
         border: none;
         border: 1px solid orange;
@@ -137,6 +137,9 @@ export default {
         &:hover {
             background-color: white;
             color: orange;
+        }
+        @media screen and (max-width: 1400px) {
+            padding: 0.6em;
         }
         @media screen and (max-width: 300px) {
             font-size: 1rem;
