@@ -88,7 +88,7 @@ export default {
             if (this.nowCategory === 'drink') resultProducts = this.productsDrink
         } else {
             resultProducts = this.searchProducts()
-        } 
+        }
         return this.filterCost(resultProducts)
     }
   },
@@ -98,8 +98,15 @@ export default {
   methods: {
     ...mapActions(['getProducts']),
     filterCost(arr) {
-        if(this.modeFilterCost) return arr.sort((a,b) => a.cost - b.cost)
-        else return arr.sort((a,b) => b.cost - a.cost)
+        if(this.modeFilterCost) return arr.sort((a,b) => this.calcDiscount(a) - this.calcDiscount(b))
+        else return arr.sort((a,b) => this.calcDiscount(b) - this.calcDiscount(a))
+    },
+    calcDiscount(a) {
+        if (a.discount) {
+            return a.cost * (1 - a.discount * 0.01)
+        } else {
+            return a.cost
+        }
     },
     changeModeFilterCost() {
         this.modeFilterCost = !this.modeFilterCost
