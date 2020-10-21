@@ -12,6 +12,7 @@
   },
   "scripts": {
     "server": "node server.js",
+    "client:dev": "npm run serve --prefix client",
     "client:build": "npm run build --prefix client",
     "client:install": "npm install --prefix client",
     "start": "concurrently \"npm run client:build\" \"npm run server\" ",

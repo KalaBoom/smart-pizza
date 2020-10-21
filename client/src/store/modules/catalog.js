@@ -52,7 +52,7 @@ export default {
             return state.cart.reduce((acc, item) => {
                 if(item.discount) return item.cost * item.count * (1 - item.discount * 0.01) + acc
                 else return (item.cost * item.count) + acc
-            }, 0)
+            }, 0).toFixed(2)
         },
         cartCount(state) {
             return state.cart.reduce((acc, item) => item.count + acc, 0)

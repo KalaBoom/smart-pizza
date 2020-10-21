@@ -21,8 +21,12 @@ app.get('/products', (req, res) => {
 })
 
 app.post('/order', (req, res) => {
-    const nowOrders = JSON.parse(fs.readFileSync('orders.json', "utf-8"))
+    let nowOrders = fs.readFileSync('orders.json', "utf-8")
+
+    if(nowOrders === "") nowOrders = []
+    else nowOrders = JSON.parse(nowOrders)
     nowOrders.push(req.body)
+    
     fs.writeFileSync('orders.json', JSON.stringify(nowOrders), 'utf8', (err) => {
         if (err) throw err;
         console.log('Заказы были обновлены');

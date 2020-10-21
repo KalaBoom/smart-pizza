@@ -1,20 +1,21 @@
 <template>
-    <div class="product">
+    <div>
         <div class="product__image">
-            <img :src="imgs[product.type]" alt="изображение" class="img">
+            <img :src="imgs[product.type]" :class="{small_img: smallImg}"  alt="изображение" class="img">
             <div class="product__image__discount" v-if="product.discount"></div>
         </div>
         <div class="product__title">{{product.title}}</div>
         <div class="product__ingredients" v-if="product.ingredients">{{product.ingredients.join(' ')}}</div>
         <div class="product__discount cost" v-if="product.discount">
             <span class="product__discount__old-cost">{{product.cost}}</span>
-            {{product.cost * (1 - product.discount * 0.01)}}
+            {{cost}}
         </div>
         <div class="product__cost cost" v-else>
-            {{product.cost}}
+           {{cost}}
         </div>
         <CountButtons class="product__count" :id="product.id" v-if="inCart"/>
         <button class=" accent-btn" @click="addItem" v-else>в корзину</button>
+        <slot></slot>
     </div>
 </template>
 
@@ -24,7 +25,8 @@ import CountButtons from '@/components/CountButtons.vue'
 export default {
     props: {
         product: Object,
-        inCart: Boolean
+        inCart: Boolean,
+        smallImg: Boolean
     },
     data() {
         return {
@@ -33,6 +35,19 @@ export default {
                 'закуска' : require('@/assets/fast-food.svg'),
                 'напиток' : require('@/assets/soft-drink.svg')
             }
+        }
+    },
+    computed: {
+        cost() {
+            let newcost = null
+            if (this.product.discount) {
+                if (this.product.count <= 0) newcost = this.product.cost * (1 - this.product.discount * 0.01)
+                else newcost = this.product.cost * this.product.count * (1 - this.product.discount * 0.01)
+            } else {
+                if (this.product.count <= 0) newcost = this.product.cost
+                else newcost = this.product.cost * this.product.count
+            }
+            return newcost.toFixed(2)
         }
     },
     methods: {
@@ -49,36 +64,15 @@ export default {
 
 <style lang="scss">
     .product {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: space-between;
-        text-align: center;
-        padding: 0.5em;
-        box-shadow: 0 0 25px rgba(0,0,0,.2);
-        margin: 0 0.25em 0.5em; 
-        border-radius: 5px;
-        width: calc(100%/5 - (0.25em * 6));
-        @media screen and (max-width: 1200px) {
-            width: calc(100%/4 - (0.25em * 6));
-        }
-        @media screen and (max-width: 800px) {
-            width: calc(100%/3 - (0.25em * 6));
-        }
-        @media screen and (max-width: 600px) {
-            width: calc(100%/2 - (0.25em * 6));
-        }
-        @media screen and (max-width: 400px) {
-            width: calc(100%/1 - (0.25em * 6));
-        }
         &__image {
             position: relative;
+            margin: 1em;
             &__discount  {
                 position: absolute;
                 background-image: url('../assets/percentage.svg');
                 background-size: contain;
-                width: 5em;
-                height: 5em;
+                width: 25%;
+                height: 25%;
                 top: 0;
                 bottom: 0;
                 left: 0;
@@ -87,15 +81,17 @@ export default {
         }
         &__title {
             height: 20%;
-            margin-top: 1em;
             text-transform: uppercase;
             font-weight: bold;
+            margin: 1em;
+            flex-grow: 1;
         }
         &__ingredients {
             color: #777;
+            flex-grow: 2;
         }
         &__cost, &__discount {
-            margin: 0.5em;
+            margin: 1em;
             height: 20%;
         }
         &__discount {
@@ -103,32 +99,32 @@ export default {
             &__old-cost {
                 position: absolute;
                 font-size: 1rem;
-                right: -3em;
+                top: -30%;
+	            left: -30%;
                 text-decoration: line-through;
                 color: #555;
             }
         }
         &__count {
-            width: 60%;
-            margin: 0 auto;
-            @media screen and (max-width: 1000px) {
-                width: 80%;
-            }
         }
-        // &__img, &__title, &__ingredients, &__cost, &__discount {
-        //     flex: 1 1 auto;
-        // }
     }
     .cost {
         font-size: 1.3rem;
         &::after {
-                content: '\20BD';
-                margin-left: 0.1em;
-            }
+            content: '\20BD';
+            position: absolute;
+            margin-left: 0.1em;
+        }
     }
     .img {
         width: 100%;
         background-color: white;
+    }
+    .big-img {
+
+    }
+    .small_img {
+        width: 5em;
     }
     .accent-btn {
         font-size: 1.2rem;
