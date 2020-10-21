@@ -12,8 +12,9 @@
   },
   "scripts": {
     "server": "node server.js",
-    "client": "npm run build --prefix client",
-    "start": "concurrently \"npm run client\" \"npm run server\" ",
+    "client:build": "npm run build --prefix client",
+    "client:install": "npm install --prefix client",
+    "start": "concurrently \"npm run client:build\" \"npm run server\" ",
     "dev": "nodemon server.js"
   },
   "repository": {

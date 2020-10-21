@@ -1,5 +1,10 @@
 # smart-pizza
 
+## Запустить приложение
+- npm i
+- npm run client:install
+- npm start
+- localhost:5000
 
 ## Требуется:
 
