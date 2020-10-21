@@ -98,11 +98,11 @@ export default {
             position: relative;
             &__old-cost {
                 position: absolute;
-                font-size: 1rem;
-                top: -30%;
-	            left: -30%;
+                font-size: 1.2rem;
+                top: -60%;
+	            right: -80%;
                 text-decoration: line-through;
-                color: #555;
+                color: orangered;
             }
         }
         &__count {
@@ -119,9 +119,6 @@ export default {
     .img {
         width: 100%;
         background-color: white;
-    }
-    .big-img {
-
     }
     .small_img {
         width: 5em;

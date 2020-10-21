@@ -1,8 +1,8 @@
 <template>
     <div class="count-btns">
-        <div class="count-btns__arrow" @click="minusCount">&minus;</div>
+        <div class="count-btns__arrow" @mousedown="minusCount">&minus;</div>
         <div class="count-btns__count">{{productCount}}</div>
-        <div class="count-btns__arrow" @click="plusCount">&plus;</div>
+        <div class="count-btns__arrow" @mousedown="plusCount">&plus;</div>
     </div>
 </template>
 
@@ -67,6 +67,7 @@ export default {
         &__arrow, &__count {
             padding: 0.5em;
             user-select: none;
+            text-align: center;
         }
         &__arrow {
             flex: 1;

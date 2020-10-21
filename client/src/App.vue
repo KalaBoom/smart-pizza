@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <header class="header">
+      <router-link to="/"><img src="./assets/pizza-slice.svg" alt="иконка пиццы" class="icon-logo"></router-link>
+      <div class="name-pizza">smart pizza</div>
+    </header>
     <router-view/>
   </div>
 </template>
@@ -24,5 +28,17 @@
   }
   a {
     text-decoration: none;
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    margin: 0 auto 2em;
+    width: 90%;
+  }
+  .name-pizza {
+    color: orange;
+    font-size: 3rem;
+    font-style: italic;
+    text-transform: uppercase;
   }
 </style>

@@ -6,6 +6,14 @@
 - npm start
 - http://localhost:5000/
 
+#### Если вылетают ошибки
+- npm install
+- cd client
+- npm install
+- cd ..
+- npm start
+- http://localhost:5000/
+
 ## Требуется:
 
 Создать интернет-магазин-пиццерию

@@ -1,10 +1,5 @@
 <template>
   <div class="home">
-    <header class="header">
-        <router-link to="/"><img src="../assets/pizza-slice.svg" alt="иконка пиццы" class="icon-logo"></router-link>
-        <input type="search" v-model="search" @input="searchProducts" placeholder="поиск..." class="search">
-    </header>
-
     <div class="catalog">
 
         <div class="nav">
@@ -43,8 +38,9 @@
                 
         </div>
 
-        <div class="filter-cost">
-            <div class="filter-cost__text" @click="changeModeFilterCost">
+        <div class="filters">
+            <input type="search" v-model="search" @input="searchProducts" placeholder="поиск..." class="filters__search">
+            <div class="filters__cost" @click="changeModeFilterCost">
                 фильтр по цене
                 <div class="arrow" :class="[{arrow_top: !modeFilterCost}, {arrow_bottom: modeFilterCost}]"></div>
             </div>
@@ -162,31 +158,17 @@ export default {
         width: 90%;
         margin: auto;
         padding: 0 0.5em;
-        @media screen and (max-width: 700px) {
-            flex-direction: column;
+        @media screen and (max-width: 800px) {
+            flex-direction: column-reverse;
+            justify-content: space-between;
         }
-    }
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 0 auto 2em;
-        width: 90%;
-        @media screen and (max-width: 400px) {
-            flex-direction: column;
-            .search {
-                width: 100%;
-            }
-        }
-    }
-    .search {
-        width: 20em;
     }
     .category {
         display: flex;
         align-items: center;
         &__radio-btn {
             margin-right: 1em;
+            text-align: center;
             & input[type=radio] {
                 display: none;
             }
@@ -194,10 +176,29 @@ export default {
                 display: inline-block;
                 font-size: 1.5rem;
                 cursor: pointer;
-                padding: 0px 0.5em;
+                padding: 0.2em 1em;
                 border: 1px solid #999;
                 border-radius: 5px;
                 user-select: none;
+            }
+        }
+        @media screen and (max-width: 800px) { 
+            justify-content: space-between;
+            &__radio-btn {
+                flex: 1;
+                margin: 0;
+                & label {
+                    font-size: 1.3rem;
+                    padding: 0.3em 0.8em;
+                    width: 60%;
+                    text-align: center;
+                }
+                &:first-child {
+                    text-align: left;
+                }
+                &:last-child {
+                    text-align: right;
+                }
             }
         }
         @media screen and (max-width: 500px) {
@@ -205,9 +206,15 @@ export default {
             &__radio-btn {
                 margin-top: 0.1em;
             }
-            &__radio-btn, &__radio-btn label {
+            &__radio-btn {
                 width: 100%;
                 padding: 0.5em;
+                &:first-child, &:last-child {
+                    text-align: center;
+                }
+            }
+            &__radio-btn label {
+                width: 90%;
             }
         }
     }
@@ -216,25 +223,46 @@ export default {
         border: 1px solid orange !important;
         color: white;
     }
-    .filter-cost {
+    .filters {
+        display: flex;
         text-align: center;
         margin: 1em auto;
         width: 90%;
-        &__text {
+        &__cost {
             position: relative;
             width: 10em;
             background-color: orange;
             color: white;
-            padding: 0.5em 2em 0.5em 0;
+            padding: 0.5em 2em 0.5em 0.3em;
             border-radius: 5px;
+            text-align: left;
             cursor: pointer;
-            @media screen and (max-width: 500px) {
+            @media screen and (max-width: 600px) {
+                margin: 1em auto 0;
+                width: 95%;
+                font-size: 1.5rem;
+                padding: 0.3em 0.3em;
+            }
+        }
+        &__search {
+            margin-right: 2em;
+            width: 16em;
+            font-size: 1.5rem;
+            @media screen and (max-width: 600px) {
+                width: 100%;
                 margin: auto;
             }
         }
+        @media screen and (max-width: 800px) {
+            justify-content: space-between;
+
+        }
+        @media screen and (max-width: 600px) {
+            flex-direction: column;
+
+        }
     }
     .basket-link {
-        margin-top: 1em;
         display: flex;
         justify-content: space-around;
         position: relative;
@@ -267,8 +295,8 @@ export default {
             top: 0;
             left: 15%;
         }
-        @media screen and (max-width: 500px) {
-            margin: auto;
+        @media screen and (max-width: 800px) {
+            margin-bottom: 1em;
         }
     }
     .arrow {

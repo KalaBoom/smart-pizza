@@ -1,6 +1,5 @@
 <template>
   <div class="basket">
-    <router-link to="/"><img src="../assets/pizza-slice.svg" alt="иконка пиццы" class="icon-logo"></router-link>
     <div class="cart">
       <h1>Корзина</h1>
       <div class="order" v-if="cart.length">
@@ -17,34 +16,42 @@
             </div>
             </CardProduct>
           </div>
-          <div class="order__sum">Сумма заказа: <span class="cost">{{cartSum}}</span></div>
+          <div class="order__sum">Сумма заказа: <span class="cost order__sum__num">{{cartSum}}</span></div>
           <div class="order__btn">
               <router-link to="/"><button class="accent-btn btn-back">Вернуться</button></router-link>
               <button class="accent-btn" @click="submitOrder">Оформить</button>
           </div>
       </div>
       <div class="none-items" v-else>Нет товаров в корзине</div>
-  </div>   
+    </div>
+    <Modal v-if="showModal" @close="showModal = false">Ваш заказ принят</Modal>   
   </div>
 </template>
 
 <script>
 import {mapGetters,mapMutations} from 'vuex'
 import CardProduct from '@/components/CardProduct.vue'
+import Modal from '@/components/Modal.vue'
 
 export default {
   name: 'Basket',
+  data() {
+    return {
+      showModal: false
+    }
+  },
   computed: mapGetters(["cart", "cartSum"]),
   methods: {
-    ...mapMutations(['removeItemToCart']),
+    ...mapMutations(['removeItemToCart', 'clearCart']),
     removeItem(id) {
         this.removeItemToCart(id)
     },
     async submitOrder() {
-      let order = {
-        products: [],
-        sum: null
-      }
+      this.showModal = true
+      this.clearCart()
+
+      let order = {products: [], sum: null}
+
       order.products = this.cart.map(item => {
         const itemOrder = {
           type: item.type,
@@ -55,7 +62,9 @@ export default {
         if(item.discount) itemOrder.cost *= (1 - item.discount * 0.01)
         return itemOrder
       })
+
       order.sum = this.cartSum
+      
       await fetch('/order', {
         method: 'POST',
         headers: {'Content-Type': 'application/json;charset=utf-8'},
@@ -65,7 +74,7 @@ export default {
     }
   },
   components: {
-    CardProduct
+    CardProduct, Modal
   }
 }
 </script>
@@ -85,7 +94,7 @@ export default {
     font-size: 1rem;
     padding: 0.7em;
     border-bottom: 1px solid #ccc;
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 800px) {
       font-size: 1.5rem;
       flex-direction: column;
       align-items: flex-start;
@@ -96,6 +105,35 @@ export default {
       }
       .product__title, .product__cost {
         margin: 1em 0;
+      }
+    }
+    .product__discount__old-cost {
+      top: -100%;
+      right: 0;
+    }
+    .product {
+      &__title {
+        width: 10%;
+      }
+      &__ingredients {
+        width: 20%;
+      }
+      @media screen and (max-width: 800px) {
+        &__title,  &__ingredients {
+          width: 100%;
+        }
+        &__cost, &__discount {
+          font-size: 1.5rem;
+          margin: 1em;
+          margin-left: 0;
+        }
+        &__discount__old-cost {
+          top: 0;
+          right: -80%;
+        }
+        &__count {
+          width: 10em;
+        }
       }
     }
   }
@@ -120,7 +158,7 @@ export default {
     @media screen and (max-width: 1200px) {
       width: 90%;
     }
-    @media screen and (max-width: 800px) {
+    @media screen and (max-width: 1000px) {
       width: 100%;
     }
   }
@@ -134,6 +172,17 @@ export default {
       font-size: 1.2rem;
       font-weight: bold;
       text-align: right;
+      padding-right: 1em;
+      @media screen and (max-width: 336px) {
+        padding-right: 0;
+      }
+      &__num {
+        display: inline;
+        @media screen and (max-width: 336px) {
+          display: block;
+          padding-right: 1em;
+        }
+      }
     }
     &__btn {
       margin-top: 1em;
@@ -141,12 +190,12 @@ export default {
     }
     @media screen and (max-width: 400px) {
       &__btn {
-          display: flex;
-          justify-content: space-between;
+        display: flex;
+        justify-content: space-between;
       }
       &__sum {
-      font-size: 1.5rem;
-    }
+        font-size: 1.5rem;
+      }
     }
   }
   .btn-back {
