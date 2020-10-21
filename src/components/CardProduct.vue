@@ -14,7 +14,9 @@
             {{product.cost}}
         </div>
         <CountButtons class="product__count" :id="product.id" v-if="inCart"/>
-        <button class="product__count accent-btn" @click="addItem" v-else>в корзину</button>
+        <div class="product__count" v-else>
+            <button class=" accent-btn" @click="addItem" >в корзину</button>
+        </div>
     </div>
 </template>
 
@@ -87,6 +89,7 @@ export default {
         }
         &__cost, &__discount {
             margin: 0.5em;
+            height: 20%;
         }
         &__discount {
             position: relative;
@@ -99,8 +102,7 @@ export default {
             }
         }
         &__count {
-            flex: 0 0 auto;
-            width: 50%;
+            width: 60%;
             margin: 0 auto;
             @media screen and (max-width: 1000px) {
                 width: 80%;
@@ -123,8 +125,7 @@ export default {
     }
     .accent-btn {
         font-size: 1.2rem;
-        height: 2.5em;
-        padding: 0.5em;
+        padding: 0.6em;
         cursor: pointer;
         border: none;
         border: 1px solid orange;

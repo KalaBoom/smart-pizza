@@ -249,4 +249,9 @@ export default {
         margin: auto;
         flex-wrap: wrap;
     }
+    .products-none {
+        width: 90%;
+        margin: auto;
+        font-size: 2rem;
+    }
 </style>

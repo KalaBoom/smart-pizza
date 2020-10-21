@@ -10,7 +10,7 @@
                 <CountButtons :id="item.id"/>
             </div>
             <div class="item__cost cost">
-                <span v-if="item.discount" class="item-discount">{{item.cost * (1 - item.discount * 0.01)}}</span>
+                <span v-if="item.discount" class="item-discount">{{item.cost * item.count * (1 - item.discount * 0.01)}}</span>
                 <span v-else>{{item.cost * item.count}}</span> 
             </div>
         </div>

@@ -56,10 +56,10 @@ export default {
 .<style lang="scss">
     .count-btns {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         border: 1px solid #ccc;
         border-radius: 10px;
-        width: 5.9em;
+        width: 6em;
         font-size: 1.2rem;
         padding: 0.1em;
         -moz-border-radius: 10px;
@@ -69,6 +69,7 @@ export default {
             user-select: none;
         }
         &__arrow {
+            flex: 1;
             background-color: white;
             cursor: pointer;
             &:hover {
