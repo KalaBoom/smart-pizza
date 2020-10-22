@@ -3,7 +3,7 @@
     <div class="modal-mask">
         <div class="modal-wrapper">
             <div class="modal-container">
-                <img src="../assets/pizza-slice.svg" alt="Иконка пиццы" class="small_img">
+                <img src="../assets/pizza-slice.svg" alt="Иконка пиццы" class="small_img modal-img">
                 <div class="modal-text">
                     <slot></slot>
                 </div>
@@ -37,7 +37,6 @@
     .modal-container {
         display: flex;
         align-items: center;
-        justify-content: space-between;
         width: 30%;
         margin: 2em auto 0;
         padding: 2em 3em;
@@ -46,20 +45,60 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
         transition: all 0.3s ease;
         font-family: Helvetica, Arial, sans-serif;
+        @media screen and (max-width: 1600px) {
+            width: 40%;
+        }
+        @media screen and (max-width: 1100px) {
+            width: 50%;
+        }
+        @media screen and (max-width: 900px) {
+            width: 60%;
+        }
+        @media screen and (max-width: 650px) {
+            flex-direction: column;
+            align-items: normal;
+        }
     }
-    .modal-text {
-        font-size: 2rem;
+
+    .modal {
+        &-img {
+            width: 5em;
+            height: 5em;
+        }
+        &-text {
+            font-size: 2rem;
+            flex: 2;
+        }
+        &-block-btn {
+            text-align: right;
+            flex: 1;
+        }
+        &-default-button {
+            border: none;
+            background-color: white;
+            background-image: url('../assets/tick-inside-circle.svg');
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            width: 5em;
+            height: 5em;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 1300px) {
+            &-img, &-default-button {
+                width: 4em;
+                height: 4em;
+            }
+        }
+        @media screen and (max-width: 1100px) {
+            &-img, &-default-button {
+                width: 3em;
+                height: 3em;
+            }
+        }
     }
-    .modal-default-button {
-        border: none;
-        background-color: white;
-        background-image: url('../assets/tick-inside-circle.svg');
-        background-size: contain;
-        background-position: center;
-        width: 5em;
-        height: 5em;
-        cursor: pointer;
-    }
+    
+    
     .modal-enter {
         opacity: 0;
     }
