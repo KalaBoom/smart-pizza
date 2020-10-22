@@ -14,13 +14,23 @@
     {"id": 5, "type": "пицца", "title": "Сырная",
         "ingredients": ["Сладкий перец", "Сыр моцарелла", "Лук", "Оливки", "Томаты", "Шампиньоны", "Томатный соус"], "cost": 400, "count": 0, "discount": false},
     
-    {"id": 6, "type": "закуска", "title": "сэндвич-ролл куриный", "cost": 199, "count": 0, "discount": false},
+    {"id": 6, "type": "закуска", "title": "Сэндвич-ролл куриный", "cost": 159, "count": 0, "discount": false},
     
-    {"id": 7, "type": "закуска", "title": "картофель фри", "cost": 149, "count": 0, "discount": false},
+    {"id": 7, "type": "закуска", "title": "Картофель фри", "cost": 149, "count": 0, "discount": false},
     
-    {"id": 8, "type": "закуска", "title": "куриные крылья BBQ", "cost": 199, "count": 0, "discount": 25},
+    {"id": 8, "type": "закуска", "title": "Куриные крылья BBQ", "cost": 199, "count": 0, "discount": 25},
+
+    {"id": 9, "type": "закуска", "title": "Рулетики с сыром", "cost": 245, "count": 0, "discount": false},
+
+    {"id": 10, "type": "закуска", "title": "Салат Цезарь", "cost": 199, "count": 0, "discount": false},
     
-    {"id": 9, "type": "напиток", "title": "Кофе Латте", "cost": 115, "count": 0, "discount": false},
+    {"id": 11, "type": "напиток", "title": "Кофе Латте", "cost": 115, "count": 0, "discount": false},
     
-    {"id": 10, "type": "напиток", "title": "Пепси", "cost": 119, "count": 0, "discount": 5}
+    {"id": 12, "type": "напиток", "title": "Пепси", "cost": 119, "count": 0, "discount": 5},
+
+    {"id": 13, "type": "напиток", "title": "Сок Апельсиновый", "cost": 145, "count": 0, "discount": 7},
+        
+    {"id": 14, "type": "напиток", "title": "Морс Вишня", "cost": 145, "count": 0, "discount": 7},
+
+    {"id": 15, "type": "напиток", "title": "Коктейль Клубничный", "cost": 160, "count": 0, "discount": false}
 ]

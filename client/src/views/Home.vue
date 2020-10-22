@@ -120,7 +120,7 @@ export default {
         searchedArr = this.getCategoryArray()
 
         return searchedArr.filter(product => {
-            const hasLetter = product.title.toLowerCase().includes(this.search)
+            const hasLetter = product.title.toLowerCase().includes(this.search.trim())
             if(hasLetter) return product
         })
     },
