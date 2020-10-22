@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <div class="catalog">
-
         <div class="nav">
             <div class="category">
                 <div class="category__radio-btn">
@@ -62,14 +61,15 @@
 <script>
 import {mapGetters, mapMutations, mapActions} from 'vuex'
 import CardProduct from '@/components/CardProduct.vue'
+
+
 export default {
   name: 'Home',
   data() {
     return {
         nowCategory: "all",
         modeFilterCost: false,
-        search: "",
-        isFound: true
+        search: ""
     }
   },
   computed: {
@@ -85,7 +85,7 @@ export default {
     }
   },
   async mounted() {
-      this.getProducts()
+      await this.getProducts()
   },
   methods: {
     ...mapActions(['getProducts']),

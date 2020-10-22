@@ -59,7 +59,7 @@ export default {
         justify-content: space-between;
         border: 1px solid #ccc;
         border-radius: 10px;
-        width: 6em;
+        width: 8em;
         font-size: 1.2rem;
         padding: 0.1em;
         -moz-border-radius: 10px;
@@ -76,6 +76,9 @@ export default {
             &:hover {
                 color: orange;
             }
+        }
+        @media screen and (max-width: 400px) {
+            width: 80%;
         }
     }
 </style>
