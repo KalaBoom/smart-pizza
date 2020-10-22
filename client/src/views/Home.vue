@@ -69,11 +69,16 @@ export default {
     return {
         nowCategory: "all",
         modeFilterCost: false,
-        search: ""
+        search: "",
+        types: {
+            'pizza': 'пицца',
+            'snacks': 'закуска',
+            'drink': 'напиток'
+        }
     }
   },
   computed: {
-    ...mapGetters(['allProducts','productsPizza', 'productsSnack', 'productsDrink', 'cartIds', 'cartSum', "cartCount"]),
+    ...mapGetters(['allProducts', 'cart', 'cartIds', 'cartSum', 'cartCount']),
     products() {
         let resultProducts = null
         if(this.search === "") {
@@ -95,9 +100,11 @@ export default {
     },
     getCategoryArray() {
         if (this.nowCategory === 'all') return this.allProducts
-        if (this.nowCategory === 'pizza') return this.productsPizza
-        if (this.nowCategory === 'snacks') return this.productsSnack
-        if (this.nowCategory === 'drink') return this.productsDrink
+        const type = this.types[this.nowCategory]
+        return this.allProducts.filter(product => {
+            if(this.cartIds.includes(product.id)) product = this.cart.find(item => item.id === product.id)
+            return product.type === type
+        })
     },
     calcDiscount(a) {
         if (a.discount) {

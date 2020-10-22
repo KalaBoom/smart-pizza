@@ -59,15 +59,6 @@ export default {
         allProducts(state) {
             return state.products
         },
-        productsPizza(state, getters) {
-            return state.products.filter(product => getProductType(getters.cart, getters.cartIds, product, 'пицца'))
-        },
-        productsSnack(state, getters) {
-            return state.products.filter(product => getProductType(getters.cart, getters.cartIds, product, 'закуска'))
-        },
-        productsDrink(state, getters) {
-            return state.products.filter(product => getProductType(getters.cart, getters.cartIds, product, 'напиток'))
-        },
         cart(state) {
             return state.cart
         },
@@ -84,9 +75,4 @@ export default {
             return state.cart.reduce((acc, item) => item.count + acc, 0)
         }
     }
-}
-
-function getProductType(cart, cartIds, product, type) {
-    if(cartIds.includes(product.id)) product = cart.find(item => item.id === product.id)
-    return product.type === type
 }
