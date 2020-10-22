@@ -37,6 +37,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'))
 })
 
+app.get('*', function(req, res){
+    res.sendFile(path.resolve(__dirname, '404.html'))
+});
+
 app.listen(PORT, ()=> {
     console.log(`Server listen on ${PORT}`)
 })
