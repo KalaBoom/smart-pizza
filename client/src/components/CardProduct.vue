@@ -11,7 +11,7 @@
             {{cost}}
         </div>
         <div class="product__cost cost" v-else>
-        {{cost}}
+            {{cost}}
         </div>
         <CountButtons class="product__count" :id="product.id" v-if="inCart"/>
         <button class=" accent-btn" @click="addItem" v-else>в корзину</button>
@@ -39,14 +39,8 @@ export default {
     },
     computed: {
         cost() {
-            let newcost = null
-            if (this.product.discount) {
-                if (this.product.count <= 0) newcost = this.product.cost * (1 - this.product.discount * 0.01)
-                else newcost = this.product.cost * this.product.count * (1 - this.product.discount * 0.01)
-            } else {
-                if (this.product.count <= 0) newcost = this.product.cost
-                else newcost = this.product.cost * this.product.count
-            }
+            let newcost = this.calcCost()
+            if (this.product.discount) newcost *= (1 - this.product.discount * 0.01)
             return newcost.toFixed(2)
         }
     },
@@ -54,6 +48,10 @@ export default {
         ...mapMutations(['addItemToCart']),
         addItem() {
             this.addItemToCart(this.product)
+        },
+        calcCost() {
+            if (this.product.count <= 0) return this.product.cost
+            return this.product.cost * this.product.count 
         }
     },
     components: {
