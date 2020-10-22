@@ -128,6 +128,8 @@ export default {
         if (this.cartIds.includes(product.id)) {
             const item = this.cart.find(item => item.id === product.id)
             return item
+        } else if ( !this.cartIds.includes(product.id) && product.count > 0) {
+            product.count = 0
         }
         return product
     }
