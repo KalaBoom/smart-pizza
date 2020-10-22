@@ -13,20 +13,22 @@
         <div class="product__cost cost" v-else>
             {{cost}}
         </div>
-        <CountButtons class="product__count" :id="product.id" v-if="inCart"/>
+        <div class="count-btns" v-if="product.count > 0">
+            <div class="count-btns__arrow" @mousedown="minusCount">&minus;</div>
+            <div class="count-btns__count">{{product.count}}</div>
+            <div class="count-btns__arrow" @mousedown="plusCount">&plus;</div>
+        </div>
         <button class=" accent-btn" @click="addItem" v-else>в корзину</button>
         <slot></slot>
     </div>
 </template>
 
 <script>
-import {mapMutations} from 'vuex'
-import CountButtons from '@/components/CountButtons.vue'
+import {mapMutations, mapGetters} from 'vuex'
 
 export default {
     props: {
-        product: Object,
-        inCart: Boolean
+        product: Object
     },
     data() {
         return {
@@ -38,24 +40,40 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(['cart']),
         cost() {
             let newcost = this.calcCost()
             if (this.product.discount) newcost *= (1 - this.product.discount * 0.01)
             return newcost.toFixed(2)
         }
     },
+    watch: {
+        count() {
+            console.log('watch')
+            return this.findCountItem(this.product.id)
+        }
+    },
     methods: {
-        ...mapMutations(['addItemToCart']),
+        ...mapMutations(['addItemToCart', 'removeItemToCart', 'changeCount']),
         addItem() {
             this.addItemToCart(this.product)
         },
         calcCost() {
             if (this.product.count <= 0) return this.product.cost
             return this.product.cost * this.product.count 
-        }
-    },
-    components: {
-        CountButtons
+        },
+        findCountItem(id) {
+            const item = this.cart.find(item => item.id === id)
+            console.log(item.title, item.count)
+            return item.count
+        },
+        minusCount() {
+            this.changeCount([this.id, --this.product.count])
+            if (this.product.count <= 0) this.removeItemToCart(this.id)
+        },
+        plusCount(count) {
+            this.changeCount([this.id, ++this.product.count])
+        },
     }
 }
 </script>
@@ -139,6 +157,33 @@ export default {
         }
         @media screen and (max-width: 300px) {
             font-size: 1rem;
+        }
+    }
+    .count-btns {
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        width: 8em;
+        font-size: 1.2rem;
+        padding: 0.1em;
+        -moz-border-radius: 10px;
+	    -webkit-border-radius: 10px;
+        &__arrow, &__count {
+            padding: 0.5em;
+            user-select: none;
+            text-align: center;
+        }
+        &__arrow {
+            flex: 1;
+            background-color: white;
+            cursor: pointer;
+            &:hover {
+                color: orange;
+            }
+        }
+        @media screen and (max-width: 400px) {
+            width: 80%;
         }
     }
 </style>

@@ -7,7 +7,6 @@
             <CardProduct v-for="(item, index) in cart"
               :key="index"
               :product="item"
-              :inCart="true"
               class="item"
             >
             <div class="block-delete">

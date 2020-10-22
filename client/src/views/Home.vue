@@ -48,8 +48,7 @@
         <div class="products" v-if="products.length">
             <CardProduct v-for="(product, index) in products"
                 :key="index"
-                :product="product"
-                :inCart="cartIds.includes(product.id)"
+                :product="hasInCart(product)"
                 class="product"
             />
         </div>
@@ -121,11 +120,17 @@ export default {
         searchedArr = this.getCategoryArray()
 
         return searchedArr.filter(product => {
-            const reqex = product.title.toLowerCase().includes(this.search)
-                if(reqex) return product
-            })
+            const hasLetter = product.title.toLowerCase().includes(this.search)
+            if(hasLetter) return product
+        })
+    },
+    hasInCart(product) {
+        if (this.cartIds.includes(product.id)) {
+            const item = this.cart.find(item => item.id === product.id)
+            return item
         }
-    
+        return product
+    }
   },
   components: {
     CardProduct
