@@ -59,11 +59,11 @@ export default {
             return item.count
         },
         minusCount() {
-            this.changeCount([this.id, --this.product.count])
-            if (this.product.count <= 0) this.removeItemToCart(this.id)
+            this.changeCount([this.product.countid, --this.product.count])
+            if (this.product.count <= 0) this.removeItemToCart(this.product.id)
         },
         plusCount(count) {
-            this.changeCount([this.id, ++this.product.count])
+            this.changeCount([this.product.id, ++this.product.count])
         },
     }
 }
@@ -99,7 +99,6 @@ export default {
         }
         &__cost, &__discount {
             margin: 1em;
-            height: 20%;
         }
         &__discount {
             position: relative;
