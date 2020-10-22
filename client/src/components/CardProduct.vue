@@ -107,7 +107,7 @@ export default {
                 position: absolute;
                 font-size: 1.2rem;
                 top: -60%;
-	            right: -80%;
+	            right: -3em;
                 text-decoration: line-through;
                 color: orangered;
             }
