@@ -104,8 +104,6 @@ export default {
                 color: orangered;
             }
         }
-        &__count {
-        }
     }
     .cost {
         font-size: 1.3rem;

@@ -77,8 +77,5 @@ export default {
                 color: orange;
             }
         }
-        &__count {
-        
-        }
     }
 </style>
