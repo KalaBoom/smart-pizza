@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <header class="header">
-      <router-link to="/"><img src="./assets/pizza-slice.svg" alt="иконка пиццы" class="icon-logo"></router-link>
-      <div class="name-pizza">smart pizza</div>
+      <router-link to="/"><img src="./assets/pizza-slice.svg" alt="иконка пиццы" class="icon-logo"><span class="name-pizza">smart pizza</span></router-link>
     </header>
     <router-view/>
   </div>

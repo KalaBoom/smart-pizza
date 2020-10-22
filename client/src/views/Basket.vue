@@ -47,7 +47,6 @@ export default {
     },
     async submitOrder() {
       this.showModal = true
-      this.clearCart()
 
       let order = {products: [], sum: null}
 
@@ -69,7 +68,7 @@ export default {
         headers: {'Content-Type': 'application/json;charset=utf-8'},
         body: JSON.stringify(order)
       })
-      console.log(JSON.stringify(order))
+      this.clearCart()
     }
   },
   components: {
