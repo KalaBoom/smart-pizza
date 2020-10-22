@@ -10,7 +10,7 @@
               class="item"
             >
             <div class="block-delete">
-              <button class="btn-delete" @click="removeItem(item.id)"></button>
+              <button class="btn-delete" @click="removeItemToCart(item.id)"></button>
             </div>
             </CardProduct>
           </div>
@@ -41,9 +41,6 @@ export default {
   computed: mapGetters(["cart", "cartSum"]),
   methods: {
     ...mapMutations(['removeItemToCart', 'clearCart']),
-    removeItem(id) {
-        this.removeItemToCart(id)
-    },
     async submitOrder() {
       this.showModal = true
 

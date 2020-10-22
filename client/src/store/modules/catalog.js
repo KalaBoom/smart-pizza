@@ -41,6 +41,9 @@ export default {
             state.cart.push(item)
         },
         removeItemToCart(state, id) {
+            state.products.forEach(product => {
+                if (product.id === id) product.count = 0
+            })
             state.cart = state.cart.filter(item => item.id !== id)
         },
         changeCount(state, arr) {

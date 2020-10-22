@@ -18,7 +18,7 @@
             <div class="count-btns__count">{{product.count}}</div>
             <div class="count-btns__arrow" @mousedown="plusCount">&plus;</div>
         </div>
-        <button class=" accent-btn" @click="addItem" v-else>в корзину</button>
+        <button class=" accent-btn" @click="addItemToCart(product)" v-else>в корзину</button>
         <slot></slot>
     </div>
 </template>
@@ -47,17 +47,8 @@ export default {
             return newcost.toFixed(2)
         }
     },
-    watch: {
-        count() {
-            console.log('watch')
-            return this.findCountItem(this.product.id)
-        }
-    },
     methods: {
         ...mapMutations(['addItemToCart', 'removeItemToCart', 'changeCount']),
-        addItem() {
-            this.addItemToCart(this.product)
-        },
         calcCost() {
             if (this.product.count <= 0) return this.product.cost
             return this.product.cost * this.product.count 
