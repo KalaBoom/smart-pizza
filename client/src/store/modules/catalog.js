@@ -29,7 +29,6 @@ export default {
             {id: 9, type: "напиток", title: "Кофе Латте", cost: 115, count: 0, discount: false},
             {id: 10, type: "напиток", title: "Пепси", cost: 119, count: 0, discount: 5}
         ],
-        //products: [],
         cart: []
     },
     mutations: {
