@@ -8,9 +8,7 @@
                     <slot></slot>
                 </div>
                 <div class="modal-block-btn">
-                    <button class="modal-default-button" @click="$emit('close')">
-                    OK
-                    </button>
+                    <button class="modal-default-button" @click="$emit('close')"></button>
                 </div>
             </div>
         </div>
@@ -51,6 +49,16 @@
     }
     .modal-text {
         font-size: 2rem;
+    }
+    .modal-default-button {
+        border: none;
+        background-color: white;
+        background-image: url('../assets/tick-inside-circle.svg');
+        background-size: contain;
+        background-position: center;
+        width: 5em;
+        height: 5em;
+        cursor: pointer;
     }
     .modal-enter {
         opacity: 0;

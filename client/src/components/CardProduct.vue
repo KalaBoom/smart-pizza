@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="product__image">
-            <img :src="imgs[product.type]" :class="{small_img: smallImg}"  alt="изображение" class="img">
+            <img :src="imgs[product.type]" alt="изображение" class="img">
             <div class="product__image__discount" v-if="product.discount"></div>
         </div>
         <div class="product__title">{{product.title}}</div>
@@ -25,8 +25,7 @@ import CountButtons from '@/components/CountButtons.vue'
 export default {
     props: {
         product: Object,
-        inCart: Boolean,
-        smallImg: Boolean
+        inCart: Boolean
     },
     data() {
         return {

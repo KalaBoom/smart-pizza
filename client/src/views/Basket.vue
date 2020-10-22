@@ -8,7 +8,6 @@
               :key="index"
               :product="item"
               :inCart="true"
-              :smallImg="true"
               class="item"
             >
             <div class="block-delete">
@@ -94,33 +93,26 @@ export default {
     font-size: 1rem;
     padding: 0.7em;
     border-bottom: 1px solid #ccc;
-    @media screen and (max-width: 800px) {
-      font-size: 1.5rem;
-      flex-direction: column;
-      align-items: flex-start;
-      .block-delete {
-        width: 100%;
-        text-align: right;
-        margin: 0;
-      }
-      .product__title, .product__cost {
-        margin: 1em 0;
-      }
-    }
-    .product__discount__old-cost {
-      top: -100%;
-      right: 0;
-    }
     .product {
+      &__image {
+        width: 5em;
+      }
       &__title {
         width: 10%;
       }
       &__ingredients {
         width: 20%;
       }
+      &__discount__old-cost {
+        top: -100%;
+        right: 0;
+      }
       @media screen and (max-width: 800px) {
         &__title,  &__ingredients {
           width: 100%;
+        }
+        &__title, &__cost {
+          margin: 1em 0;
         }
         &__cost, &__discount {
           font-size: 1.5rem;
@@ -135,6 +127,17 @@ export default {
           width: 10em;
         }
       }
+    }
+    @media screen and (max-width: 800px) {
+      font-size: 1.5rem;
+      flex-direction: column;
+      align-items: flex-start;
+      .block-delete {
+        width: 100%;
+        text-align: right;
+        margin: 0;
+      }
+      
     }
   }
   .btn-delete {

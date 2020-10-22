@@ -50,6 +50,7 @@ export default {
             })
         },
         clearCart(state) {
+            state.products.forEach(product => product.count = 0)
             state.cart = []
         }
     },

@@ -51,7 +51,6 @@
                 :key="index"
                 :product="product"
                 :inCart="cartIds.includes(product.id)"
-                :smallImg="false"
                 class="product"
             />
         </div>
@@ -78,10 +77,7 @@ export default {
     products() {
         let resultProducts = null
         if(this.search === "") {
-            if (this.nowCategory === 'all') resultProducts = this.allProducts
-            if (this.nowCategory === 'pizza') resultProducts = this.productsPizza
-            if (this.nowCategory === 'snacks') resultProducts = this.productsSnack
-            if (this.nowCategory === 'drink') resultProducts = this.productsDrink
+            resultProducts = this.getCategoryArray()
         } else {
             resultProducts = this.searchProducts()
         }
@@ -97,6 +93,12 @@ export default {
         if(this.modeFilterCost) return arr.sort((a,b) => this.calcDiscount(a) - this.calcDiscount(b))
         else return arr.sort((a,b) => this.calcDiscount(b) - this.calcDiscount(a))
     },
+    getCategoryArray() {
+        if (this.nowCategory === 'all') return this.allProducts
+        if (this.nowCategory === 'pizza') return this.productsPizza
+        if (this.nowCategory === 'snacks') return this.productsSnack
+        if (this.nowCategory === 'drink') return this.productsDrink
+    },
     calcDiscount(a) {
         if (a.discount) {
             return a.cost * (1 - a.discount * 0.01)
@@ -109,16 +111,13 @@ export default {
     },
     searchProducts() {
         let searchedArr = null
-        if (this.nowCategory === 'all') searchedArr = this.allProducts
-        if (this.nowCategory === 'pizza') searchedArr = this.productsPizza
-        if (this.nowCategory === 'snacks') searchedArr = this.productsSnack
-        if (this.nowCategory === 'drink') searchedArr = this.productsDrink
+        searchedArr = this.getCategoryArray()
 
         return searchedArr.filter(product => {
             const reqex = product.title.toLowerCase().includes(this.search)
                 if(reqex) return product
             })
-        } 
+        }
     
   },
   components: {
