@@ -49,6 +49,7 @@
             <CardProduct v-for="(product, index) in products"
                 :key="index"
                 :product="hasInCart(product)"
+                :calcTotalCost="false"
                 class="product"
             />
         </div>
@@ -120,7 +121,7 @@ export default {
         searchedArr = this.getCategoryArray()
 
         return searchedArr.filter(product => {
-            const hasLetter = product.title.toLowerCase().includes(this.search.trim())
+            const hasLetter = product.title.toLowerCase().includes(this.search.trim().toLowerCase())
             if(hasLetter) return product
         })
     },

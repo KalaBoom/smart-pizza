@@ -28,7 +28,8 @@ import {mapMutations, mapGetters} from 'vuex'
 
 export default {
     props: {
-        product: Object
+        product: Object,
+        calcTotalCost: Boolean
     },
     data() {
         return {
@@ -50,7 +51,7 @@ export default {
     methods: {
         ...mapMutations(['addItemToCart', 'removeItemToCart', 'changeCount']),
         calcCost() {
-            if (this.product.count <= 0) return this.product.cost
+            if (this.product.count <= 0 || this.calcTotalCost === false) return this.product.cost
             return this.product.cost * this.product.count 
         },
         findCountItem(id) {
